@@ -1,11 +1,72 @@
 <!doctype html>
-<html>
+<html lang="en">
   <head>
-    <title>Store Embeddings</title>
-    <link rel="stylesheet" href="index.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Podcast Search AI</title>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script type="importmap">
+      {
+        "imports": {
+          "@google/generative-ai": "https://esm.run/@google/generative-ai"
+        }
+      }
+    </script>
+    <style>
+      body {
+        font-family: sans-serif;
+        max-width: 600px;
+        margin: 40px auto;
+        padding: 20px;
+        line-height: 1.6;
+      }
+      .search-container {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 20px;
+      }
+      input {
+        flex: 1;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+      }
+      button {
+        padding: 10px 20px;
+        background: #3ecf8e;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+      #results {
+        border-top: 1px solid #eee;
+        padding-top: 20px;
+      }
+      .result-item {
+        margin-bottom: 15px;
+        padding: 10px;
+        background: #f9f9f9;
+        border-radius: 4px;
+      }
+      .similarity {
+        font-size: 0.8em;
+        color: #666;
+      }
+    </style>
   </head>
   <body>
-    <h1></h1>
-    <script type="module" src="index.js"></script>
+    <h1>🎙️ Podcast Search</h1>
+    <div class="search-container">
+      <input
+        type="text"
+        id="searchInput"
+        placeholder="Ask about the podcast..."
+      />
+      <button id="searchBtn">Search</button>
+    </div>
+    <div id="results"></div>
+
+    <script type="module" src="app.js"></script>
   </body>
 </html>

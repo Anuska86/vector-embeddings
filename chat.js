@@ -4,13 +4,13 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 //Chat Model
 
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
-const chatModel = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+const chatModel = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
 
 async function askQuestion(question) {
   const result = await embeddingModel.embedContent(question);
   const { data: documents } = await supabase.rpc("match_documents", {
     query_embedding: result.embedding.values,
-    match_threshold: 0.1,
+    match_threshold: 0.3,
     match_count: 3,
   });
 

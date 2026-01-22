@@ -1,21 +1,26 @@
-import { openai, supabase } from "./config.js";
+import { embeddingModel, supabase } from "./config.js";
 import podcasts from "./content.js";
 
 async function main(input) {
-  await Promise.all(
+  const data = await Promise.all(
     input.map(async (textChunk) => {
-      const embeddingResponse = await openai.embeddings.create({
-        model: "text-embedding-ada-002",
-        input: textChunk,
-      });
+      const result = await embeddingModel.embedContent(textChunk);
+      const embedding = result.embedding.values;
+
       return {
         content: textChunk,
-        embedding: embeddingResponse.data[0].embedding,
+        embedding: embedding,
       };
     }),
   );
 
-  // Insert content and embedding into Supabase
-  await supabase.from("documents").insert(data);
-  console.log("Embedding complete!");
+  //Insert into Supabase
+
+  const { error } = await supabase.from("documents").inset(data);
+
+  if (error) {
+    console.error("Error inserting into Supabase:", error);
+  } else {
+    console.log("Embedding and insertion complete!");
+  }
 }

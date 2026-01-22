@@ -1,5 +1,10 @@
 {
+  "name": "my-embedding-project",
+  "version": "1.0.0",
+  "type": "module",
   "dependencies": {
-    "@google/generative-ai": "^0.24.1"
+    "@google/generative-ai": "^0.24.1",
+    "@supabase/supabase-js": "^2.x.x",
+    "dotenv": "^16.6.1"
   }
 }

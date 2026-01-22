@@ -16,7 +16,7 @@ async function main(input) {
 
   //Insert into Supabase
 
-  const { error } = await supabase.from("documents").inset(data);
+  const { error } = await supabase.from("documents").insert(data);
 
   if (error) {
     console.error("Error inserting into Supabase:", error);
@@ -24,3 +24,5 @@ async function main(input) {
     console.log("Embedding and insertion complete!");
   }
 }
+
+main(podcasts)
